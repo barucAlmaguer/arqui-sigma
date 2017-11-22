@@ -13,7 +13,7 @@ app = Flask(__name__)
 def room():
     return render_template('addroom.html', data=None)
 
-@app.route("/templates/addroom/add", methods=["POST"])
+@app.route("/templates/addroom/add", methods=["POST", "GET"])
 def add():
     global url
 	_coolroomid = request.form['addroom_input']
