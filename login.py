@@ -16,14 +16,14 @@ def room():
 @app.route("/templates/addroom/add", methods=["POST", "GET"])
 def add():
     global url
-    db = MySQLdb.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname)
-    cursor = db.cursor()
 	_coolroomid = request.form['addroom_input']
 	if _coolroomid:
+        # db = MySQLdb.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname)
+        db = MySQLdb.connect("localhost","root","1234","sigma" )
+		cursor = db.cursor()
 		cursor.execute("INSERT INTO coolrooms VALUES('{}');".format(_coolroomid))
-	db.close()
+		db.close()
 	return render_template('general.html')
-
 
 @app.route("/")
 def main():
