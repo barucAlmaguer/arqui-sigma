@@ -17,7 +17,7 @@ def main():
 @app.route("/templates/main_page.html", methods=["POST"])
 def main_page():
     global url
-    db = MySQLdb.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
+    db = MySQLdb.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname)
     cursor = db.cursor()
     cursor.execute("SELECT * FROM sigma.userdata;")
     data = cursor.fetchall()
@@ -45,7 +45,7 @@ def type():
     _sensortype = request.form['order_by']
     _coolroomid = request.form['coolroom_input']
     print(_coolroomid, _sensortype)
-    db = MySQLdb.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
+    db = MySQLdb.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname)
     cursor = db.cursor()
 
     if _sensortype and _coolroomid:
@@ -62,8 +62,6 @@ def type():
     db.close()
 
     return render_template('main_page.html', data = data)
-
-
 
 # cursor.execute("SELECT * FROM sigma.sensors, WHERE SENSOR_TYPE = %s" % type)
 
