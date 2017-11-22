@@ -23,7 +23,7 @@ def add():
         cursor = db.cursor()
         cursor.execute("INSERT INTO coolrooms VALUES('{}');".format(_coolroomid))
         db.close()
-    return render_template('/templates/general.html')
+    return render_template('/templates/main_page.html')
 
 @app.route("/")
 def main():
