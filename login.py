@@ -13,13 +13,12 @@ app = Flask(__name__)
 def room():
     return render_template('addroom.html', data=None)
 
-@app.route("/templates/addroom/add", methods=["POST", "GET"])
+@app.route("/templates/addroom/add", methods=["POST"])
 def add():
     global url
 	_coolroomid = request.form['addroom_input']
 	if _coolroomid:
-        # db = MySQLdb.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname)
-        db = MySQLdb.connect("localhost","root","1234","sigma" )
+        db = MySQLdb.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname)
 		cursor = db.cursor()
 		cursor.execute("INSERT INTO coolrooms VALUES('{}');".format(_coolroomid))
 		db.close()
