@@ -1,7 +1,6 @@
 from flask import Flask, render_template,request,redirect,url_for
 from flask import jsonify
 import MySQLdb
-
 import os
 from urllib import parse
 parse.uses_netloc.append("mysql")
@@ -17,13 +16,14 @@ def room():
 @app.route("/templates/addroom/add", methods=["POST", "GET"])
 def add():
     global url
+    db = MySQLdb.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname)
+    cursor = db.cursor()
 	_coolroomid = request.form['addroom_input']
 	if _coolroomid:
-        db = MySQLdb.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname)
-		cursor = db.cursor()
 		cursor.execute("INSERT INTO coolrooms VALUES('{}');".format(_coolroomid))
-		db.close()
+	db.close()
 	return render_template('general.html')
+
 
 @app.route("/")
 def main():
