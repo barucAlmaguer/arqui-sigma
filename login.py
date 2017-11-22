@@ -18,7 +18,7 @@ def room():
 def add():
 	_coolroomid = request.form['addroom_input']
 	if _coolroomid:
-		db = MySQLdb.connect("localhost","root","1234","sigma" )
+        db = MySQLdb.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname)
 		cursor = db.cursor()
 		cursor.execute("INSERT INTO coolrooms VALUES('{}');".format(_coolroomid))
 		db.close()
