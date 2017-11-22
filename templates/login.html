@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Log In - Sigma</title>
+	<link rel=stylesheet type=text/css href="/static/login.css">
+</head>
+
+<div class="logo">
+	<p align="center">
+		<img src="/static/brand.png" alt="Sigma Logo">
+	</p>
+</div>
+<div class="login">
+	<form action="/templates/main_page.html" autocomplete="off" method="post">
+		<fieldset>
+			<legend><b>Log In:</b></legend>
+			{% if flag_1 == 0 %}
+				<p style="color:red; padding: 10px 20px 0px 0px;"> El usuario o contraseña es incorrecto</p>
+			{% endif %}
+			<div class="login_2">
+				
+				<p>Username:</p>
+				<input type="text" name="user_input"><br>
+				<p>Password:</p>
+				<input type="password" name="password_input"><br><br>
+				<input type="submit" value="Submit">
+			</div>
+		</fieldset>
+	</form>
+</div>
+</html>

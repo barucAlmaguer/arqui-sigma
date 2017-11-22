@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sigma - Home</title>
+	<link rel="stylesheet" href="/static/login.css">
+</head>
+<div>
+	<div class="logo" style="background-color: #DAF7A6; border-style: none;border-width: 0px;">
+		<img src="/static/brand.png" alt="Sigma Logo" style="width:100px; height:100px;">
+		<div class="title">
+			Cool Room Manager
+		</div>
+	</div>
+</div>
+<aside style="float:left">
+<li>
+	<div class="dropdown">
+	  <button class="dropbtn">Home</button>
+	  <div class="dropdown-content">
+	    <a href="#">Add new rooms</a>
+	    <a href="#">Delete rooms</a>
+	    <a href="#">Select rooms</a>
+	  </div>
+	</div>
+</li>
+
+<li>
+	<div class="dropdown">
+	  <button class="dropbtn">Info</button>
+	  <div class="dropdown-content">
+	    <a href="#">FAQ</a>
+	    <a href="#">HELP</a>
+	    <a href="#">About US</a>
+	  </div>
+	</div>
+</li>
+
+<li>
+	<div class="dropdown">
+	  <button class="dropbtn">Search</button>
+	  <div class="dropdown-content">
+	    <a href="#">GENERAL</a>
+	    <a href="#">MAX VALUE</a>
+	    <a href="#">MIN VALUE</a>
+	  </div>
+	</div>
+</li>
+
+<li>
+	<div class="dropdown">
+	  <button class="dropbtn">Estadistics</button>
+	  <div class="dropdown-content">
+	    <a href="#">WEEKLY</a>
+	    <a href="#">MONTHLY</a>
+	    <a href="#">ANNUALY</a>
+	  </div>
+	</div>
+</li>
+</aside>
+
+<div class="login" style="padding-left: 130px;width: 800px;">
+	<form action="/templates/main_page/order" autocomplete="off" method="post">
+		<fieldset style="background-color: #76ecb2;">
+			<legend><b>Search:</b></legend>
+				COOLROOM ID: 
+				<input type="text" name="coolroom_input">
+				<select name="order_by" style="font-size: 15px;">
+					<option></option>
+					<option value = "current">Current</option>
+					<option value = "temperature">Temperature</option>
+					<option value = "humidity">Humidity</option>
+				</select>
+			<input type="submit" value="Submit">
+		</fieldset>
+	</form>
+</div>	
+
+<div style="overflow: auto; padding-left: 20px; max-height: 400px;" >
+	<table style="width:75%; font-family: courier; " >
+		<tr>
+			<th>SENSOR_ID</th>
+			<th>COOLROOM_ID</th>
+			<th>SENSOR_TYPE</th>
+			<th>SENSOR_VALUE</th>
+			<th>SENSOR_DATE</th>
+		</tr>
+
+		{% for item in data %}
+			<tr>
+				{% for value in item %}
+					<th>{{ value }}</th>
+				{% endfor %}
+			</tr>
+		{% endfor %}	
+	</table>
+</div>
+</html>
