@@ -1,5 +1,12 @@
 from flask import Flask, render_template,request,redirect,url_for
+from flask import jsonify
 import MySQLdb
+
+import os
+from urllib import parse
+
+parse.uses_netloc.append("mysql")
+url = parse.urlparse(os.environ["CLEARDB_DATABASE_URL"])
 
 app = Flask(__name__)
 
@@ -9,7 +16,8 @@ def main():
 
 @app.route("/templates/main_page.html", methods=["POST"])
 def main_page():
-    db = MySQLdb.connect("localhost","root","1234","sigma" )
+    global url
+    db = MySQLdb.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
     cursor = db.cursor()
     cursor.execute("SELECT * FROM sigma.userdata;")
     data = cursor.fetchall()
@@ -33,10 +41,11 @@ def main_page():
 
 @app.route("/templates/main_page/order", methods=["POST"])
 def type():
+    global url
     _sensortype = request.form['order_by']
     _coolroomid = request.form['coolroom_input']
-    print (_coolroomid, _sensortype)
-    db = MySQLdb.connect("localhost","root","1234","sigma" )
+    print(_coolroomid, _sensortype)
+    db = MySQLdb.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
     cursor = db.cursor()
 
     if _sensortype and _coolroomid:
