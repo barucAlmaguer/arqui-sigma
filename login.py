@@ -4,9 +4,9 @@ import MySQLdb
 
 import os
 from urllib import parse
-
 parse.uses_netloc.append("mysql")
-url = parse.urlparse(os.environ["CLEARDB_DATABASE_URL"])
+url = parse.urlparse('mysql://b33a56b4775761:c18ee5bb@us-cdbr-iron-east-05.cleardb.net/heroku_6a420a42245211e?reconnect=true')
+#url = parse.urlparse(os.environ["CLEARDB_DATABASE_URL"])
 
 app = Flask(__name__)
 
@@ -19,7 +19,7 @@ def main_page():
     global url
     db = MySQLdb.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname)
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM sigma.userdata;")
+    cursor.execute("SELECT * FROM  userdata;")
     data = cursor.fetchall()
 
     _username = request.form['user_input']
@@ -32,7 +32,7 @@ def main_page():
                 flag_1 = 1
                 break
         if flag_1 == 1:
-            cursor.execute("SELECT * FROM sigma.sensors;")
+            cursor.execute("SELECT * FROM  sensors;")
             data = cursor.fetchall()
             return render_template('main_page.html', data = data)
         else:
@@ -49,13 +49,13 @@ def type():
     cursor = db.cursor()
 
     if _sensortype and _coolroomid:
-        query = "SELECT * FROM sigma.sensors WHERE SENSOR_TYPE = '%s' AND COOLROOM_ID = %s;" %(_sensortype, _coolroomid)
+        query = "SELECT * FROM  sensors WHERE SENSOR_TYPE = '%s' AND COOLROOM_ID = %s;" %(_sensortype, _coolroomid)
     elif not _sensortype and _coolroomid:
-        query = "SELECT * FROM sigma.sensors WHERE COOLROOM_ID = %s;" %(_coolroomid)
+        query = "SELECT * FROM  sensors WHERE COOLROOM_ID = %s;" %(_coolroomid)
     elif not _coolroomid and _sensortype:
-        query = "SELECT * FROM sigma.sensors WHERE SENSOR_TYPE = '%s';" %(_sensortype)
+        query = "SELECT * FROM  sensors WHERE SENSOR_TYPE = '%s';" %(_sensortype)
     else:
-        query = "SELECT * FROM sigma.sensors;"    
+        query = "SELECT * FROM  sensors;"    
     
     cursor.execute(query)
     data = cursor.fetchall()
@@ -63,7 +63,7 @@ def type():
 
     return render_template('main_page.html', data = data)
 
-# cursor.execute("SELECT * FROM sigma.sensors, WHERE SENSOR_TYPE = %s" % type)
+# cursor.execute("SELECT * FROM  sensors, WHERE SENSOR_TYPE = %s" % type)
 
 # Primera Alternativa:
 # 1. Hacer una funcion de javascript que se llame a si misma con el metodo interval
