@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Sigma - About Us</title>
+	<link rel="stylesheet" href="/static/login.css">
+</head>
+
+<header>
+	<div class="logo" style="background-color: #DAF7A6; border-style: none;border-width: 0px;">
+		<img src="/static/brand.png" alt="Sigma Logo" style="width:100px; height:100px;">
+		<div class="title">
+			Cool Room Manager
+		</div>
+		<div class="title" style="float:right; font-size: 14px;">
+			{{ results }}
+			<a href="/">Logout</a>
+			}
+		</div>
+	</div>
+</header>
+<body>
+<aside style="float:left">
+	<li style="list-style-type: none;">
+		<div class="dropdown">
+		  <button class="dropbtn">Home</button>
+		  <div class="dropdown-content">
+		    <a href="/templates/addroom.html">Add new rooms</a>
+		    <a href="#">Delete rooms</a>
+		    <a href="#">Select rooms</a>
+		  </div>
+		</div>
+	</li>
+
+	<li style="list-style-type: none;">
+		<div class="dropdown">
+		  <button class="dropbtn">Info</button>
+		  <div class="dropdown-content">
+		    <a href="#">FAQ</a>
+		    <a href="#">HELP</a>
+		    <a href="#">About US</a>
+		  </div>
+		</div>
+	</li>
+
+	<li style="list-style-type: none;">
+		<div class="dropdown">
+		  <button class="dropbtn">Search</button>
+		  <div class="dropdown-content">
+		    <a href="#">GENERAL</a>
+		    <a href="#">MAX VALUE</a>
+		    <a href="#">MIN VALUE</a>
+		  </div>
+		</div>
+	</li>
+
+	<li style="list-style-type: none;">
+		<div class="dropdown">
+		  <button class="dropbtn">Estadistics</button>
+		  <div class="dropdown-content">
+		    <a href="#">WEEKLY</a>
+		    <a href="#">MONTHLY</a>
+		    <a href="#">ANNUALY</a>
+		  </div>
+		</div>
+	</li>
+</aside>
+
+<div class="addroom" style="float:left; overflow: hidden; max-height: 500px;">
+	<form action="/templates/addroom/add" autocomplete="off" method="post">
+		<table>
+			<tr>
+				<td> Add room: </td>
+			</tr>
+			<tr>
+				<td> COOLROOM ID: </td>
+				<td> <input type="text" name="addroom_input"> </td>
+			</tr>
+			<tr>
+				<td> <input type="submit" value="Submit"> </td>
+			</tr>
+		</table>
+	</form>
+</div>
+</body>
+</html>

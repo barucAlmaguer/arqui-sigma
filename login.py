@@ -10,6 +10,20 @@ url = parse.urlparse('mysql://b33a56b4775761:c18ee5bb@us-cdbr-iron-east-05.clear
 
 app = Flask(__name__)
 
+@app.route("/templates/addroom.html")
+def room():
+    return render_template('addroom.html', data=None)
+
+@app.route("/templates/addroom/add", methods=["POST", "GET"])
+def add():
+	_coolroomid = request.form['addroom_input']
+	if _coolroomid:
+		db = MySQLdb.connect("localhost","root","1234","sigma" )
+		cursor = db.cursor()
+		cursor.execute("INSERT INTO coolrooms VALUES('{}');".format(_coolroomid))
+		db.close()
+	return render_template('general.html')
+
 @app.route("/")
 def main():
     return render_template('login.html')
